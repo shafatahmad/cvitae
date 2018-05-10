@@ -26,7 +26,7 @@ workbox.routing.registerRoute('https://use.fontawesome.com/releases/v5.0.12/css/
                                     workbox.strategies.networkFirst());
 
 workbox.routing.registerRoute(/\.(?:png|gif|jpg)$/,
-workboxSW.strategies.cacheFirst({
+workbox.strategies.cacheFirst({
     cacheName: 'images',
     cacheExpiration: {
     maxEntries: 50, maxAgeSeconds: 12*60*60

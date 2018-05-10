@@ -1,0 +1,7 @@
+{
+  "name": "c.v",
+  "version": "1.0.0",
+  "dependencies": {
+    "workbox-sw": "^3.2.0"
+  }
+}

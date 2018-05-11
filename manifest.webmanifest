@@ -5,8 +5,7 @@
   "background_color": "#2196f3",
   "display": "standalone",
   "orientation": "portrait",
-  "Scope": "/",
-  "start_url": "/?utm_source=homescreen",
+  "start_url": "/cvitae/index.html?utm_source=homescreen",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
@@ -48,6 +47,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "splash_pages": null
+  ]
 }

@@ -3,11 +3,11 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 
 const staticAssets =[
     './',
+    './assets/css/bootstrap4.1.1.min.css',
     './assets/css/style.min.css',
-    './assets/css/script.min.js',
-    './app.js',
-    './img/avatar.jpg'
+    './img/avatar.png'
 ];
+
 
 if (workbox) {
   console.log('Yay! Workbox is loaded 🎉');
@@ -18,16 +18,29 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+self.addEventListener('fetch', function(event) {
+
+  console.log(event.request.url);
+  
+  event.respondWith(
+  
+  caches.match(event.request).then(function(response) {
+  
+  return response || fetch(event.request);
+  
+  })
+  
+  );
+  
+  });
+
 workbox.routing.registerRoute('https://fonts.googleapis.com/(.*)', 
                                     workbox.strategies.networkFirst());
 
 
-workbox.routing.registerRoute('https://use.fontawesome.com/releases/v5.0.12/css/(.*)', 
-                                    workbox.strategies.networkFirst());
-
 workbox.routing.registerRoute(/\.(?:png|gif|jpg)$/,
-workboxSW.strategies.cacheFirst({
-    cacheName: 'images',
+workbox.strategies.cacheFirst({
+    cacheName: 'images-cache',
     cacheExpiration: {
     maxEntries: 50, maxAgeSeconds: 12*60*60
     }})

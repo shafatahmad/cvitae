@@ -4,9 +4,8 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 const staticAssets =[
     './',
     './assets/css/bootstrap4.1.1.min.css',
-    './img/avatar.jpg'
+    './img/avatar.png'
 ];
-
 
 
 if (workbox) {
@@ -18,12 +17,25 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+self.addEventListener('fetch', function(event) {
+
+  console.log(event.request.url);
+  
+  event.respondWith(
+  
+  caches.match(event.request).then(function(response) {
+  
+  return response || fetch(event.request);
+  
+  })
+  
+  );
+  
+  });
+
 workbox.routing.registerRoute('https://fonts.googleapis.com/(.*)', 
                                     workbox.strategies.networkFirst());
 
-
-workbox.routing.registerRoute('https://use.fontawesome.com/releases/v5.0.12/css/(.*)', 
-                                    workbox.strategies.networkFirst());
 
 workbox.routing.registerRoute(/\.(?:png|gif|jpg)$/,
 workbox.strategies.cacheFirst({
